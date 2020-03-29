@@ -3,7 +3,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 
-namespace JPBotelho
+namespace Spline
 {
     /*  
         Catmull-Rom splines are Hermite curves with special tangent values.
