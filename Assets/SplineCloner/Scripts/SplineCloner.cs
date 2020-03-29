@@ -31,7 +31,7 @@ namespace Spline
             }
         }
 
-        void Update()
+        void OnDrawGizmos()
         {
             if (m_spline != null)
             {
@@ -130,7 +130,6 @@ namespace Spline
                     m_clones = new List<GameObject>();
                     foreach (GameObject g in gos)
                         m_clones.Add(g);
-
                 }
 
             }
