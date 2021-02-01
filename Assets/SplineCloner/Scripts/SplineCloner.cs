@@ -68,53 +68,65 @@ namespace Spline
             //distanceToMove represents how much farther
             //we need to progress down the spline before
             //we place the next object
-            int nextSplinePointIndex = 1;
             float distanceToMove = m_distanceBetweenObjects;
 
-            //our current position on the spline
-            Vector3 positionIterator = points[0].position;
+            //our current position on the CatmullRom spline
+            Vector3 lastPointPosition = points[0].position;
 
             ////our algo skips the first control point, so 
             ////we need to manually place the first object
-            GameObject b = Instantiate(m_objectToClone, positionIterator, Quaternion.identity);
-            m_clones.Add(b);
-            Vector3 direction = (points[nextSplinePointIndex].position - positionIterator);
-            b.transform.rotation = Quaternion.LookRotation(direction);
+            int nextSplinePointIndex = 1;
+            GameObject firstClone = Instantiate(m_objectToClone, lastPointPosition, Quaternion.identity);
+            m_clones.Add(firstClone);
+
+            //Calculate the direction towards the next point in the spline
+            Vector3 direction = (points[nextSplinePointIndex].position - lastPointPosition);
+
+            //Rotate the Clone to point towards the next point
+            firstClone.transform.rotation = Quaternion.LookRotation(direction);
 
 
             for (int i = 0; i < points.Length - 1; i++)
             {
                 while (nextSplinePointIndex < points.Length)
                 {
-                    direction = (points[nextSplinePointIndex].position - positionIterator);
+                    //Get the direction we need to move along the spline as a normalized Vector
+                    direction = (points[nextSplinePointIndex].position - lastPointPosition);
                     direction = direction.normalized;
-                    float distanceToNextPoint = Vector3.Distance(positionIterator, points[nextSplinePointIndex].position);
+
+                    //Get the distance we need to move along the spline
+                    float distanceToNextPoint = Vector3.Distance(lastPointPosition, points[nextSplinePointIndex].position);
+
                     if (distanceToNextPoint >= distanceToMove)
                     {
-                        positionIterator += direction * distanceToMove;
+                        lastPointPosition += direction * distanceToMove;
 
-                        GameObject go = Instantiate(m_objectToClone, positionIterator, Quaternion.identity);
-                        m_clones.Add(go);
-                        go.transform.rotation = Quaternion.LookRotation(direction);
+                        GameObject clone = Instantiate(m_objectToClone, lastPointPosition, Quaternion.identity);
+                        m_clones.Add(clone);
+                        clone.transform.rotation = Quaternion.LookRotation(direction);
 
                         distanceToMove = m_distanceBetweenObjects;
                     }
                     else
                     {
                         distanceToMove -= distanceToNextPoint;
-                        positionIterator = points[nextSplinePointIndex++].position;
+
+                        //Update the position to the next point along the spline
+                        lastPointPosition = points[nextSplinePointIndex++].position;
                     }
                 }
 
             }
 
-            float increment = 1.0f / m_clones.Count;
+
+            //Scale the array of objects based on the MinMax Curve
+            float scaleIncrement = 1.0f / m_clones.Count;
 
             for (int i = 0; i < m_clones.Count; i++)
             {
                 m_clones[i].tag = "Respawn";
 
-                float scale = Mathf.Lerp(m_scaleMinMax.x, m_scaleMinMax.y, m_scaleCurve.Evaluate(i * increment));
+                float scale = Mathf.Lerp(m_scaleMinMax.x, m_scaleMinMax.y, m_scaleCurve.Evaluate(i * scaleIncrement));
                 m_clones[i].transform.localScale = Vector3.one * scale;
             }
 

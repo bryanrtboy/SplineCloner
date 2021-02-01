@@ -12,8 +12,7 @@
     <ui:Toggle label="Closed" binding-path="m_closedLoop" />
     <ui:SliderInt picking-mode="Ignore" label="Resolution" value="2" high-value="20" binding-path="m_resolution" name="Resolution" low-value="2" show-input-field="true" />
     <uie:CurveField label="Scaling Curve" binding-path="m_scaleCurve" name="ScalingCurve" />
-    <ui:Label text="min" />
-    <ui:MinMaxSlider picking-mode="Ignore" label="Min and Max Scale" min-value="0.01" max-value="1" low-limit="0.0001" high-limit="10" binding-path="m_scaleMinMax" />
+    <ui:MinMaxSlider picking-mode="Ignore" label="Scaling Range" min-value="0.01" max-value="1" low-limit="0.0001" high-limit="10" binding-path="m_scaleMinMax" />
     <uie:ObjectField label="Object To Clone" binding-path="m_objectToClone" allow-scene-objects="true" name="ObjectToClone" usage-hints="None" view-data-key="objectToClone" />
     <ui:Slider picking-mode="Ignore" label="Distance Between Objects" value="0.2" high-value="2" binding-path="m_distanceBetweenObjects" low-value="0" name="DistanceBetween" show-input-field="true" />
     <ui:Button text="PlaceObjects" binding-path="PlaceObjects" name="PlaceObjects" style="margin-top: 20px; margin-bottom: 20px; margin-left: 20px; margin-right: 20px; height: 30px;" />
