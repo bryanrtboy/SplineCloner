@@ -1,37 +1,20 @@
-<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements">
+<ui:UXML xmlns:ui="UnityEngine.UIElements" xmlns:uie="UnityEditor.UIElements" editor-extension-mode="False">
+    <Style src="SplineUI.uss" />
     <ui:Foldout text="Control Points" name="ControlFoldout" value="false">
-        <Style src="SplineUI.uss" />
-        <ui:ListView focusable="True" name="ControlPoints" binding-path="m_controlPoints" view-data-key="ControlPoints" style="flex-grow: 1;&#10;height: 150px;&#10;" />
+        <ui:ListView focusable="True" name="ControlPoints" binding-path="m_controlPoints" view-data-key="ControlPoints" style="flex-grow: 1; height: 150px;" />
     </ui:Foldout>
     <ui:Foldout text="Debug Settings" name="Debug" value="false">
-        <Style src="SplineUI.uss" />
         <ui:Slider picking-mode="Ignore" label="Normal Extrusion" value="0.1" high-value="1" name="Normals" low-value="0.001" binding-path="m_normalExtrusion" />
         <ui:Slider picking-mode="Ignore" label="Tangent Extrusion" value="0.1" high-value="1" name="Tangents" low-value="0.001" binding-path="m_tangentExtrusion" />
         <ui:Toggle label="Draw Normals" binding-path="m_drawNormal" />
         <ui:Toggle label="Draw Tangents" binding-path="m_drawTangent" />
     </ui:Foldout>
-    <ui:Toggle label="Closed" binding-path="m_closedLoop">
-        <Style src="SplineUI.uss" />
-    </ui:Toggle>
-    <ui:SliderInt picking-mode="Ignore" label="Resolution" value="2" high-value="20" binding-path="m_resolution" name="Resolution" low-value="2">
-        <Style src="SplineUI.uss" />
-    </ui:SliderInt>
-    <uie:CurveField label="Scaling Curve" binding-path="m_scaleCurve" name="ScalingCurve">
-        <Style src="SplineUI.uss" />
-    </uie:CurveField>
-    <ui:Label text="min">
-        <Style src="SplineUI.uss" />
-    </ui:Label>
-    <ui:MinMaxSlider picking-mode="Ignore" label="Min and Max Scale" min-value="0.01" max-value="1" low-limit="0.0001" high-limit="10" binding-path="m_scaleMinMax">
-        <Style src="SplineUI.uss" />
-    </ui:MinMaxSlider>
-    <uie:ObjectField label="Object To Clone" binding-path="m_objectToClone" allow-scene-objects="true" name="ObjectToClone" usage-hints="None" view-data-key="objectToClone">
-        <Style src="SplineUI.uss" />
-    </uie:ObjectField>
-    <ui:Slider picking-mode="Ignore" label="Distance Between Objects" value="0.2" high-value="2" binding-path="m_distanceBetweenObjects" low-value="0" name="DistanceBetween">
-        <Style src="SplineUI.uss" />
-    </ui:Slider>
-    <ui:Button text="PlaceObjects" binding-path="PlaceObjects" name="PlaceObjects" style="margin-top: 20px;&#10;margin-bottom: 20px;&#10;margin-left: 20px;&#10;margin-right: 20px;&#10;height: 30px;&#10;">
-        <Style src="SplineUI.uss" />
-    </ui:Button>
+    <ui:Toggle label="Closed" binding-path="m_closedLoop" />
+    <ui:SliderInt picking-mode="Ignore" label="Resolution" value="2" high-value="20" binding-path="m_resolution" name="Resolution" low-value="2" show-input-field="true" />
+    <uie:CurveField label="Scaling Curve" binding-path="m_scaleCurve" name="ScalingCurve" />
+    <ui:Label text="min" />
+    <ui:MinMaxSlider picking-mode="Ignore" label="Min and Max Scale" min-value="0.01" max-value="1" low-limit="0.0001" high-limit="10" binding-path="m_scaleMinMax" />
+    <uie:ObjectField label="Object To Clone" binding-path="m_objectToClone" allow-scene-objects="true" name="ObjectToClone" usage-hints="None" view-data-key="objectToClone" />
+    <ui:Slider picking-mode="Ignore" label="Distance Between Objects" value="0.2" high-value="2" binding-path="m_distanceBetweenObjects" low-value="0" name="DistanceBetween" show-input-field="true" />
+    <ui:Button text="PlaceObjects" binding-path="PlaceObjects" name="PlaceObjects" style="margin-top: 20px; margin-bottom: 20px; margin-left: 20px; margin-right: 20px; height: 30px;" />
 </ui:UXML>
